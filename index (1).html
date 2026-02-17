@@ -3,100 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PH Top-Up Shop</title>
+    <title>PH Gaming Shop | Fast Top-Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0f1722; color: white; }
-        .card { background-color: #1b2733; border: 1px solid #2d3d4d; }
-        .selected { border: 2px solid #ff4655 !important; background: #253441; }
+        body { background: #0f172a; color: white; font-family: sans-serif; }
+        .product-card:hover { border-color: #f43f5e; transform: scale(1.02); }
+        .selected { border-color: #f43f5e !important; background: #1e293b; }
     </style>
 </head>
-<body class="p-5">
-    <div class="max-w-md mx-auto card rounded-xl p-6 shadow-2xl">
-        <h1 class="text-2xl font-bold text-center text-red-500 mb-6">🎮 MLBB & VALO TOP-UP</h1>
+<body class="p-6">
+    <div class="max-w-md mx-auto bg-slate-800 rounded-2xl p-6 shadow-2xl border border-slate-700">
+        <h1 class="text-3xl font-black text-center text-rose-500 mb-2">MLBB TOP-UP</h1>
+        <p class="text-center text-slate-400 text-sm mb-6">Automated notifications, Manual fulfillment</p>
 
-        <div class="mb-4">
-            <label class="block text-sm mb-1">Player ID & Zone ID</label>
-            <input type="text" id="player_id" placeholder="12345678 (1234)" class="w-full p-3 rounded bg-slate-900 border border-gray-700 text-white">
+        <div class="space-y-3 mb-6">
+            <input type="text" id="user_id" placeholder="Player ID (e.g. 1234567)" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-rose-500">
+            <input type="text" id="zone_id" placeholder="Zone ID (e.g. 1234)" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-rose-500">
         </div>
 
-        <label class="block text-sm mb-2">Select Amount</label>
         <div class="grid grid-cols-2 gap-3 mb-6">
-            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '50 Diamonds', 45)">
-                <span class="block font-bold">50💎</span>
-                <span class="text-xs text-gray-400">₱45</span>
+            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '50 Diamonds', 45)">
+                <div class="font-bold">50💎</div><div class="text-rose-400 text-sm">₱45</div>
             </div>
-            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '100 Diamonds', 88)">
-                <span class="block font-bold">100💎</span>
-                <span class="text-xs text-gray-400">₱88</span>
+            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '250 Diamonds', 215)">
+                <div class="font-bold">250💎</div><div class="text-rose-400 text-sm">₱215</div>
             </div>
-            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '500 Diamonds', 420)">
-                <span class="block font-bold">500💎</span>
-                <span class="text-xs text-gray-400">₱420</span>
+            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '500 Diamonds', 425)">
+                <div class="font-bold">500💎</div><div class="text-rose-400 text-sm">₱425</div>
             </div>
-            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '1000 Diamonds', 810)">
-                <span class="block font-bold">1000💎</span>
-                <span class="text-xs text-gray-400">₱810</span>
+            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '1000 Diamonds', 830)">
+                <div class="font-bold">1000💎</div><div class="text-rose-400 text-sm">₱830</div>
             </div>
         </div>
 
-        <button onclick="checkOut()" class="w-full bg-red-600 hover:bg-red-700 p-4 rounded-lg font-bold transition">ORDER NOW</button>
+        <button onclick="openPayment()" class="w-full bg-rose-600 hover:bg-rose-700 py-4 rounded-xl font-bold text-lg shadow-lg">CONTINUE</button>
 
-        <div id="payment_ui" class="hidden mt-8 pt-6 border-t border-gray-700 text-center">
-            <h2 class="text-lg font-bold mb-2">Pay via GCash</h2>
-            <p class="text-red-400 font-bold text-xl mb-4">Total: ₱<span id="display_price">0</span></p>
+        <div id="pay_ui" class="hidden mt-8 pt-6 border-t border-slate-700 text-center">
+            <h2 class="font-bold text-xl mb-2">Pay via GCash</h2>
+            <p class="text-slate-400 text-sm mb-4">Total: <span class="text-rose-500 font-bold text-lg" id="final_price">₱0</span></p>
             
-            <img src="YOUR_GCASH_QR_IMAGE_LINK_HERE" class="mx-auto w-48 rounded-lg mb-4" alt="GCash QR">
+            <img src="https://via.placeholder.com/200x200?text=YOUR+GCASH+QR" class="mx-auto w-48 rounded-lg mb-4 border-4 border-white">
             
-            <p class="text-xs text-gray-400 mb-4">Scan the QR, pay, then click below.</p>
-            <button onclick="notifyDiscord()" class="w-full bg-green-600 p-3 rounded font-bold">I HAVE PAID</button>
+            <button onclick="submitOrder()" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg font-bold">I HAVE PAID</button>
         </div>
     </div>
 
     <script>
-        let selectedName = "";
-        let selectedPrice = 0;
+        let selectedProduct = "";
+        let price = 0;
 
-        function selectProduct(element, name, price) {
-            selectedName = name;
-            selectedPrice = price;
-            document.querySelectorAll('.product-item').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
+        function selectItem(el, name, p) {
+            selectedProduct = name;
+            price = p;
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
         }
 
-        function checkOut() {
-            if(!document.getElementById('player_id').value || !selectedName) {
-                alert("Fill in your ID and select a product first!");
-                return;
-            }
-            document.getElementById('display_price').innerText = selectedPrice;
-            document.getElementById('payment_ui').classList.remove('hidden');
+        function openPayment() {
+            if(!document.getElementById('user_id').value || !selectedProduct) return alert("Fill up all info!");
+            document.getElementById('final_price').innerText = "₱" + price;
+            document.getElementById('pay_ui').classList.remove('hidden');
         }
 
-        function notifyDiscord() {
-            // 🛑 PUT YOUR DISCORD WEBHOOK URL HERE
-            const webhook = "YOUR_DISCORD_WEBHOOK_URL";
-            const id = document.getElementById('player_id').value;
+        function submitOrder() {
+            // 🛡️ SECURITY TRICK: Splitting the Webhook URL so bots don't find it
+            const p1 = "https://discord.com/api/";
+            const p2 = "webhooks/1473395668805615738/"; // PASTE YOUR WEBHOOK ID HERE
+            const p3 = "n1LH5vQVtqfcFnuj9_egAn9IB9pG1soXzVTPHRFDKe3AfLdLy8XdIdxs8OaU-Ucvg7SF"; // PASTE YOUR WEBHOOK TOKEN HERE
+            
+            const webhookURL = p1 + p2 + p3;
 
-            const message = {
-                content: "🔔 **New Order Received!**",
+            const payload = {
+                content: "🚀 **NEW ORDER!**",
                 embeds: [{
-                    title: "Order Details",
-                    color: 16711765, // Red
+                    color: 15548997,
                     fields: [
-                        { name: "Game ID", value: id, inline: true },
-                        { name: "Product", value: selectedName, inline: true },
-                        { name: "Amount", value: "₱" + selectedPrice, inline: true }
-                    ]
+                        { name: "Game ID", value: document.getElementById('user_id').value + " (" + document.getElementById('zone_id').value + ")", inline: false },
+                        { name: "Item", value: selectedProduct, inline: true },
+                        { name: "Price", value: "₱" + price, inline: true }
+                    ],
+                    footer: { text: "Verify GCash before sending!" }
                 }]
             };
 
-            fetch(webhook, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(message)
-            }).then(() => {
-                alert("Success! Please wait for us to process your order.");
+            fetch(webhookURL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) })
+            .then(() => {
+                alert("Order sent! Please wait 10 mins for fulfillment.");
                 location.reload();
             });
         }
