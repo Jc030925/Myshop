@@ -3,92 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PH Gaming Shop | Fast Top-Up</title>
+    <title>Nexus Gaming | Fast Top-Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background: #0f172a; color: white; font-family: sans-serif; }
-        .product-card:hover { border-color: #f43f5e; transform: scale(1.02); }
-        .selected { border-color: #f43f5e !important; background: #1e293b; }
+        body { background: #0b0e14; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .neon-border:hover { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.3); }
+        .selected-item { border-color: #f43f5e !important; background: rgba(244, 63, 94, 0.15); box-shadow: 0 0 20px rgba(244, 63, 94, 0.2); }
     </style>
 </head>
-<body class="p-6">
-    <div class="max-w-md mx-auto bg-slate-800 rounded-2xl p-6 shadow-2xl border border-slate-700">
-        <h1 class="text-3xl font-black text-center text-rose-500 mb-2">MLBB TOP-UP</h1>
-        <p class="text-center text-slate-400 text-sm mb-6">Automated notifications, Manual fulfillment</p>
+<body class="min-h-screen p-4 md:p-8">
 
-        <div class="space-y-3 mb-6">
-            <input type="text" id="user_id" placeholder="Player ID (e.g. 1234567)" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-rose-500">
-            <input type="text" id="zone_id" placeholder="Zone ID (e.g. 1234)" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-rose-500">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-4 space-y-6">
+            <div class="glass p-8 rounded-[2rem]">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-rose-600 rounded-2xl flex items-center justify-center shadow-lg shadow-rose-600/30">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-black text-2xl tracking-tighter italic">NEXUS</h1>
+                        <p class="text-[10px] text-rose-500 uppercase font-bold tracking-[0.2em]">Gaming Credits</p>
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-500 uppercase mb-2 tracking-widest">Step 1: Game Details</label>
+                        <input type="text" id="uid" placeholder="Player ID" class="w-full p-4 rounded-2xl bg-slate-900/80 border border-slate-700 focus:outline-none focus:border-rose-500 transition placeholder:text-slate-600">
+                    </div>
+                    <input type="text" id="zid" placeholder="Zone ID" class="w-full p-4 rounded-2xl bg-slate-900/80 border border-slate-700 focus:outline-none focus:border-rose-500 transition placeholder:text-slate-600">
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-[2rem] hidden lg:block">
+                <div class="flex items-center gap-3 text-sm text-slate-400">
+                    <i class="fas fa-shield-check text-green-500"></i>
+                    <span>Official Partner Fulfillment</span>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '50 Diamonds', 45)">
-                <div class="font-bold">50💎</div><div class="text-rose-400 text-sm">₱45</div>
+        <div class="lg:col-span-8 space-y-6">
+            <div class="glass p-8 rounded-[2rem]">
+                <label class="block text-[10px] font-black text-slate-500 uppercase mb-6 tracking-widest">Step 2: Select Credits</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, '86 Diamonds', 75)">
+                        <div class="text-xl font-black italic mb-1">86💎</div>
+                        <div class="text-rose-500 font-bold">₱75</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, '172 Diamonds', 145)">
+                        <div class="text-xl font-black italic mb-1">172💎</div>
+                        <div class="text-rose-500 font-bold">₱145</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, '257 Diamonds', 220)">
+                        <div class="text-xl font-black italic mb-1">257💎</div>
+                        <div class="text-rose-500 font-bold">₱220</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, '706 Diamonds', 590)">
+                        <div class="text-xl font-black italic mb-1">706💎</div>
+                        <div class="text-rose-500 font-bold">₱590</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, '1050 Diamonds', 880)">
+                        <div class="text-xl font-black italic mb-1">1050💎</div>
+                        <div class="text-rose-500 font-bold">₱880</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-3xl text-center cursor-pointer neon-border transition product-card" onclick="select(this, 'Twilight Pass', 450)">
+                        <div class="text-xl font-black italic mb-1 text-yellow-500">PASS</div>
+                        <div class="text-rose-500 font-bold">₱450</div>
+                    </div>
+                </div>
             </div>
-            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '250 Diamonds', 215)">
-                <div class="font-bold">250💎</div><div class="text-rose-400 text-sm">₱215</div>
-            </div>
-            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '500 Diamonds', 425)">
-                <div class="font-bold">500💎</div><div class="text-rose-400 text-sm">₱425</div>
-            </div>
-            <div class="product-card p-4 border border-slate-700 rounded-xl text-center cursor-pointer transition" onclick="selectItem(this, '1000 Diamonds', 830)">
-                <div class="font-bold">1000💎</div><div class="text-rose-400 text-sm">₱830</div>
+
+            <div class="glass p-8 rounded-[2rem] flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                    <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Final Amount</p>
+                    <h2 class="text-4xl font-black text-white italic" id="price-tag">₱0.00</h2>
+                </div>
+                <button onclick="checkout()" class="w-full sm:w-auto px-10 py-5 bg-rose-600 hover:bg-rose-700 text-white font-black rounded-2xl shadow-xl shadow-rose-600/30 transition-all active:scale-95 text-lg">
+                    PROCEED TO PAYMENT
+                </button>
             </div>
         </div>
+    </div>
 
-        <button onclick="openPayment()" class="w-full bg-rose-600 hover:bg-rose-700 py-4 rounded-xl font-bold text-lg shadow-lg">CONTINUE</button>
-
-        <div id="pay_ui" class="hidden mt-8 pt-6 border-t border-slate-700 text-center">
-            <h2 class="font-bold text-xl mb-2">Pay via GCash</h2>
-            <p class="text-slate-400 text-sm mb-4">Total: <span class="text-rose-500 font-bold text-lg" id="final_price">₱0</span></p>
+    <div id="payment-modal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-6 z-50">
+        <div class="glass p-8 rounded-[2.5rem] max-w-sm w-full text-center relative border-rose-500/30">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-500 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+            <h2 class="text-2xl font-black mb-1 italic">PAY VIA GCASH</h2>
+            <p class="text-slate-500 text-xs mb-6">Scan and pay exact amount</p>
             
-            <img src="https://via.placeholder.com/200x200?text=YOUR+GCASH+QR" class="mx-auto w-48 rounded-lg mb-4 border-4 border-white">
+            <img src="YOUR_QR_IMAGE_HERE" class="w-full rounded-3xl mb-6 border-2 border-slate-700 p-2 bg-white">
             
-            <button onclick="submitOrder()" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg font-bold">I HAVE PAID</button>
+            <input type="text" id="ref_no" placeholder="GCash Ref No. (13 Digits)" class="w-full p-4 mb-4 rounded-xl bg-slate-900 border border-slate-700 text-center font-mono text-sm focus:border-green-500 outline-none">
+            
+            <button onclick="sendOrder()" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white font-black rounded-2xl transition-all shadow-lg shadow-green-600/20">
+                CONFIRM PAYMENT
+            </button>
         </div>
     </div>
 
     <script>
-        let selectedProduct = "";
-        let price = 0;
+        let selName = ""; let selPrice = 0;
 
-        function selectItem(el, name, p) {
-            selectedProduct = name;
-            price = p;
-            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
+        function select(el, name, price) {
+            selName = name; selPrice = price;
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected-item'));
+            el.classList.add('selected-item');
+            document.getElementById('price-tag').innerText = "₱" + price + ".00";
         }
 
-        function openPayment() {
-            if(!document.getElementById('user_id').value || !selectedProduct) return alert("Fill up all info!");
-            document.getElementById('final_price').innerText = "₱" + price;
-            document.getElementById('pay_ui').classList.remove('hidden');
+        function checkout() {
+            if(!selName || !document.getElementById('uid').value) return alert("❌ Please enter your ID and select a product!");
+            document.getElementById('payment-modal').classList.remove('hidden');
         }
 
-        function submitOrder() {
-            // 🛡️ SECURITY TRICK: Splitting the Webhook URL so bots don't find it
-            const p1 = "https://discord.com/api/";
-            const p2 = "webhooks/1473395668805615738/"; // PASTE YOUR WEBHOOK ID HERE
-            const p3 = "n1LH5vQVtqfcFnuj9_egAn9IB9pG1soXzVTPHRFDKe3AfLdLy8XdIdxs8OaU-Ucvg7SF"; // PASTE YOUR WEBHOOK TOKEN HERE
+        function closeModal() { document.getElementById('payment-modal').classList.add('hidden'); }
+
+        function sendOrder() {
+            const ref = document.getElementById('ref_no').value;
+            if(ref.length < 5) return alert("❌ Please enter a valid GCash Reference Number!");
+
+            // 🛡️ SECURITY: Split Webhook Link
+            const base = "https://discord.com/api/webhooks/";
+            const id = "1473395668805615738"; 
+            const token = "n1LH5vQVtqfcFnuj9_egAn9IB9pG1soXzVTPHRFDKe3AfLdLy8XdIdxs8OaU-Ucvg7SF";
             
-            const webhookURL = p1 + p2 + p3;
-
             const payload = {
-                content: "🚀 **NEW ORDER!**",
+                content: "🔥 **NEW ORDER RECEIVED** 🔥",
                 embeds: [{
-                    color: 15548997,
+                    color: 15749238,
+                    title: "Transaction Details",
                     fields: [
-                        { name: "Game ID", value: document.getElementById('user_id').value + " (" + document.getElementById('zone_id').value + ")", inline: false },
-                        { name: "Item", value: selectedProduct, inline: true },
-                        { name: "Price", value: "₱" + price, inline: true }
+                        { name: "🎮 Game ID", value: "`" + document.getElementById('uid').value + " (" + document.getElementById('zid').value + ")`", inline: false },
+                        { name: "📦 Product", value: selName, inline: true },
+                        { name: "💰 Price", value: "₱" + selPrice, inline: true },
+                        { name: "🧾 Ref No.", value: "`" + ref + "`", inline: false }
                     ],
-                    footer: { text: "Verify GCash before sending!" }
+                    timestamp: new Date()
                 }]
             };
 
-            fetch(webhookURL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) })
-            .then(() => {
-                alert("Order sent! Please wait 10 mins for fulfillment.");
+            fetch(base + id + "/" + token, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("✅ Payment info submitted! Please wait for verification.");
                 location.reload();
             });
         }
