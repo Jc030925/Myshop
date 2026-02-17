@@ -3,96 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Anniversary | Kai</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PH Top-Up Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f1722; color: white; }
+        .card { background-color: #1b2733; border: 1px solid #2d3d4d; }
+        .selected { border: 2px solid #ff4655 !important; background: #253441; }
+    </style>
 </head>
-<body>
+<body class="p-5">
+    <div class="max-w-md mx-auto card rounded-xl p-6 shadow-2xl">
+        <h1 class="text-2xl font-bold text-center text-red-500 mb-6">🎮 MLBB & VALO TOP-UP</h1>
 
-<video autoplay muted loop id="bg-video-final" style="display: none; position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; z-index: -1; object-fit: cover; opacity: 0; transition: opacity 2s ease-in-out;">
-  <source src="https://www.dropbox.com/scl/fi/b4xh5v9bpy7zq7wo8k95k/Untitled-video-Made-with-Clipchamp-5.mp4?rlkey=1v82dwpdsoiki9oovfy2rks41&raw=1" type="video/mp4">
-</video>
+        <div class="mb-4">
+            <label class="block text-sm mb-1">Player ID & Zone ID</label>
+            <input type="text" id="player_id" placeholder="12345678 (1234)" class="w-full p-3 rounded bg-slate-900 border border-gray-700 text-white">
+        </div>
 
-<div id="heart-container"></div>
-
-<div id="envelope-wrapper" class="envelope-container" onclick="openEnvelope()">
-  <div class="envelope">
-    <div class="wax-seal">Kai</div>
-    <div class="flap"></div>
-    <div class="front"></div>
-  </div>
-  <div class="instruction-text pounding">Tap to Open Your Heart ❤</div>
-</div>
-
-<div id="invitation-letter" class="letter-card">
-  <div class="photo-column side-left">
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/adhnbec9zboj51o86mqak/IMG_1460.jpg?rlkey=9pvn7aofvsygyl3b27f8g99gk&raw=1"></div>
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/3tniq3c0y23f195y94mi0/IMG_0928.jpg?rlkey=rrw7xvuu63f07f93cbal8djkt&raw=1"></div>
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/y7w0ubmwvpmikyzyb5nfo/IMG_6723.jpg?rlkey=pweovla3uu6i2r4ywqsj9u409&raw=1"></div>
-  </div>
-  <div class="photo-column side-right">
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/pbwr0tw5dum84yzt1uyuh/IMG_7162.jpg?rlkey=d6wujrao5arhw00x85g7j9xc4&raw=1"></div>
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/6ombefiadebw8rwsi05gz/IMG_726.jpg?rlkey=q8u625sd3jmry4h7qg2yamji6&raw=1"></div>
-      <div class="photo-frame"><img src="https://www.dropbox.com/scl/fi/5xp9ox8dmsh1qnkegx53l/IMG_67823.jpg?rlkey=y22vid7ecffpccnjh25w14ajv&raw=1"></div>
-  </div>
-
-  <div class="letter-inner">
-    <h2 class="script-title">My Dearest Luv,</h2>
-    <p class="body-text">
-      Kai from the moment you walked into my life, every day has been a beautiful chapter filled with love and the sweetest memories.
-    </p>
-    <div class="divider">❤</div>
-    <div class="info-box">
-      <p class="event-name">Join me as we celebrate our first year of love</p>
-      <p class="date-time">March 21, 2026 • 5:00 PM</p>
-      <p class="venue">📍 Hidden Garden Cafe</p>
-    </div>
-    <button class="action-btn" onclick="confirmDate()">Confirm Date? ❤</button>
-  </div>
-</div>
-
-<div id="final-stage" style="display: none; text-align: center;">
-  <div id="confirmation-letter" class="letter-card" style="display: block; margin: 0 auto 30px;">
-    <div class="letter-inner">
-      <h2 class="script-title-final">Date Confirmed!</h2>
-      <div class="divider">❤</div>
-      <p class="body-text-final">It's a date! I can't wait to celebrate every second of our first year with you. <br>I love you Kai!</p>
-    </div>
-  </div>
-
-  <div id="big-timer-container">
-    <div class="timer-label">TIME UNTIL OUR ANNIVERSARY CELEBRATION</div>
-    <div id="timer-display">00d : 00h : 00m : 00s</div>
-    <div class="heart-lock-container">
-        <button id="secret-heart-btn" class="heart-btn" onclick="checkDateUnlock()">Click Me ❤</button>
-        <div id="lock-timer" class="lock-countdown" style="display: none; color: #ff80ab; font-weight: bold; margin-top: 15px; font-size: 1.1rem; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 5px;"></div>
-    </div>
-  </div>
-</div>
-
-<div id="third-stage" style="display: none; overflow-y: auto; max-height: 90vh; padding: 20px;">
-    <div class="letter-card" style="display: block; margin: 0 auto; max-width: 650px;">
-        <div class="letter-inner">
-            <h2 class="script-title">Happy 1st Anniversary, Luv!</h2>
-            <div class="divider">❤❤❤</div>
-            <div class="romantic-text">
-                <p>Happy 1st Anniversary, Luv! 1 year na tayo and honestly, it’s been the best year of my life. Thank you for staying by my side through everything sa mga tawa, sa mga asaran, at kahit sa mga times na hindi tayo magkaintindihan at nagkakapikunan tayo (lakas mo kasi mang inis HAHAHA), pero yun nga, nandiyan ka pa rin. I love you so much!</p>
-                <p>Sana road to forever na talaga 'to and walang iwanan, ha? Mahal na mahal talaga kita and I can't imagine my world without you baka mabaliw ako niyan, sige ka! You are my safe place and my best friend all in one. Sa totoo lang, ikaw lang ang nakikita kong makakasama ko pagtanda (pero mauuna ako kasi 25 na ako eh HAHAHAHA). Ikaw lang ang gusto kong pakasalan, tandaan mo yan. At pangako ko sayo, hinding-hindi kita iiwan o lolokohin. Kahit anong mangyari, kakayanin natin basta magkasama tayo.</p>
-                <p>I promise to be more patient, to listen more, and to always choose you every single day. Thank you for accepting all my flaws and for loving me for who I am. Ikaw ang pahinga ko sa magulong mundo, and I promise to be your protector and your constant through it all.</p>
-                <p>I’m so excited for all the travels, the food trips, and even the simple moments na magkatabi lang tayo. Thank you for making me the happiest person this past year. I promise to be better for you every single day. Happy 1st Anniversary, Luv! Cheers to a lifetime of 'us'!</p>
-                <div class="divider">❤</div>
-                <div class="ps-text">
-                    <strong>PS:</strong>  Wag mong kakalimutan yung date natin sa March 21! Gusto ko magmukha kang Disney Princess wag lang si Fiona. Sana nagustuhan mo rin ginawa kong website sumakit ulo ko HAHAHAHA. Tagal tagal ko tong ginawa! Kung tutuusin may Canva naman, pero gusto ko effort talaga ikaw na yan eh! cute ko ba mag mahal? HAHAHAHA. I love you Baby BOTCHOG!
-                </div>
+        <label class="block text-sm mb-2">Select Amount</label>
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '50 Diamonds', 45)">
+                <span class="block font-bold">50💎</span>
+                <span class="text-xs text-gray-400">₱45</span>
+            </div>
+            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '100 Diamonds', 88)">
+                <span class="block font-bold">100💎</span>
+                <span class="text-xs text-gray-400">₱88</span>
+            </div>
+            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '500 Diamonds', 420)">
+                <span class="block font-bold">500💎</span>
+                <span class="text-xs text-gray-400">₱420</span>
+            </div>
+            <div class="p-3 border border-gray-700 rounded text-center cursor-pointer product-item" onclick="selectProduct(this, '1000 Diamonds', 810)">
+                <span class="block font-bold">1000💎</span>
+                <span class="text-xs text-gray-400">₱810</span>
             </div>
         </div>
+
+        <button onclick="checkOut()" class="w-full bg-red-600 hover:bg-red-700 p-4 rounded-lg font-bold transition">ORDER NOW</button>
+
+        <div id="payment_ui" class="hidden mt-8 pt-6 border-t border-gray-700 text-center">
+            <h2 class="text-lg font-bold mb-2">Pay via GCash</h2>
+            <p class="text-red-400 font-bold text-xl mb-4">Total: ₱<span id="display_price">0</span></p>
+            
+            <img src="YOUR_GCASH_QR_IMAGE_LINK_HERE" class="mx-auto w-48 rounded-lg mb-4" alt="GCash QR">
+            
+            <p class="text-xs text-gray-400 mb-4">Scan the QR, pay, then click below.</p>
+            <button onclick="notifyDiscord()" class="w-full bg-green-600 p-3 rounded font-bold">I HAVE PAID</button>
+        </div>
     </div>
-</div>
 
-<audio id="bgMusic" loop><source src="https://www.dropbox.com/scl/fi/xgvx479rqmh8refwkdu0q/easy.mp3?rlkey=an4hycmujdife5ujhcyc0myun&raw=1" type="audio/mpeg"></audio>
-<audio id="finalMusic" loop><source src="https://www.dropbox.com/scl/fi/0ayhvqzje9eltxwo3c9dy/Golden-Hour-JVKE-Cinematic-Violin-Cover-ItsAMoney.mp3?rlkey=2habyu2zw86d5q3zqp5d5vo4c&raw=1" type="audio/mpeg"></audio>
+    <script>
+        let selectedName = "";
+        let selectedPrice = 0;
 
-<script src="script.js"></script>
+        function selectProduct(element, name, price) {
+            selectedName = name;
+            selectedPrice = price;
+            document.querySelectorAll('.product-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function checkOut() {
+            if(!document.getElementById('player_id').value || !selectedName) {
+                alert("Fill in your ID and select a product first!");
+                return;
+            }
+            document.getElementById('display_price').innerText = selectedPrice;
+            document.getElementById('payment_ui').classList.remove('hidden');
+        }
+
+        function notifyDiscord() {
+            // 🛑 PUT YOUR DISCORD WEBHOOK URL HERE
+            const webhook = "YOUR_DISCORD_WEBHOOK_URL";
+            const id = document.getElementById('player_id').value;
+
+            const message = {
+                content: "🔔 **New Order Received!**",
+                embeds: [{
+                    title: "Order Details",
+                    color: 16711765, // Red
+                    fields: [
+                        { name: "Game ID", value: id, inline: true },
+                        { name: "Product", value: selectedName, inline: true },
+                        { name: "Amount", value: "₱" + selectedPrice, inline: true }
+                    ]
+                }]
+            };
+
+            fetch(webhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(message)
+            }).then(() => {
+                alert("Success! Please wait for us to process your order.");
+                location.reload();
+            });
+        }
+    </script>
 </body>
 </html>
-
-
